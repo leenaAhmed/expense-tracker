@@ -2,7 +2,7 @@
 
 A modern, responsive expense tracking web application built with **Angular 20**, featuring currency conversion, pagination, and offline-first architecture.
 
-![Angular](https://img.shields.io/badge/Angular-18-red?logo=angular)
+![Angular](https://img.shields.io/badge/Angular-20-red?logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue?logo=typescript)
 ![Tailwind](https://img.shields.io/badge/Tailwind-3.4-38B2AC?logo=tailwind-css)
 ![License](https://img.shields.io/badge/License-MIT-green)
