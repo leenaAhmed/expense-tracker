@@ -1,0 +1,85 @@
+<div  class="bg-primary rounded-b-2xl px-6 pt-10 mb-16 shadow-lg relative">
+    <div class="flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white font-semibold">
+          {{ getUserInitials() }}
+        </div>
+        <div>
+          <p class="text-white/80 text-sm">Good Morning</p>
+          <p class="text-white font-semibold">{{ currentUser?.name || 'User' }}</p>
+        </div>
+      </div>
+
+       <div class="relative">
+        <button 
+          (click)="toggleFilterDropdown()"
+          class="bg-white px-4 py-2 rounded-lg text-sm font-medium text-gray-700 flex items-center gap-2 shadow-sm"
+        >
+          {{ selectedFilter }}
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+
+        @if (showFilterDropdown) {
+        <div  class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-xl z-50 py-2">
+          @for (filter of filters; track filter) {
+            <button
+              (click)="selectFilter(filter)"
+              class="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm"
+              [class.bg-primary]="filter === selectedFilter"
+              [class.text-white]="filter === selectedFilter"
+            >
+              {{ filter }}
+            </button>
+          }
+        </div>
+        }
+      </div>
+    </div>
+     <div class="bg-primary-light backdrop-blur-sm  rounded-[40px]  p-6 text-white relative overflow-hidden transform translate-y-12">
+       <div class="flex items-center justify-between mb-3">
+        <p class="text-white/80 text-sm flex items-center gap-1">
+          Total Balance
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+          </svg>
+        </p>
+        <button class="text-white/80 hover:text-white">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+          </svg>
+        </button>
+      </div>
+      
+      <h2 class="text-4xl font-bold mb-6">
+        {{ formatCurrency(summary.totalBalance) }}
+      </h2>
+
+       <div class="flex gap-4">
+        <div class="flex-1 rounded-xl p-4">
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="rounded-full p-1 bg-white/40">
+                <lucide-icon [img]="arrowdown" [size]="20" class="text-gray-600"></lucide-icon>
+              </span>
+              <span class="text-sm text-white/80">Income</span>
+            </div>
+          </div>
+          <p class="text-xl font-bold">{{ formatCurrency(summary.totalIncome) }}</p>
+        </div>
+
+        <div class="flex-1  rounded-xl p-4">
+          <div class="flex items-center justify-between mb-1">
+            <div class="flex items-center gap-2">
+              <span class="rounded-full p-1 bg-white/40">
+                 <lucide-icon [img]="arrowup" [size]="20" class="text-gray-600"></lucide-icon>
+              </span>
+              <span class="text-sm text-white/80">Expenses</span>
+            </div>
+          </div>
+          <p class="text-xl font-bold">{{ formatCurrency(summary.totalExpenses) }}</p>
+        </div>
+      </div>
+    </div>
+  </div>

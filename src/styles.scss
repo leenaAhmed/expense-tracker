@@ -1,0 +1,135 @@
+@use '@angular/material' as mat;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #fff;
+  color: #1a1a2e;
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-xl shadow-sm p-6 border border-gray-100;
+  }
+
+  .btn {
+    @apply px-6 py-3 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-primary text-white hover:bg-primary-dark focus:ring-primary;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all;
+  }
+
+  .fab {
+    @apply fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-primary-dark transition-all hover:scale-110;
+  }
+}
+
+:root {
+  @include mat.select-overrides(
+    (
+      panel-background-color: #f4f6fa,
+      enabled-trigger-text-color: #111928,
+      disabled-arrow-color: #98a2b3,
+      enabled-arrow-color: #667085,
+      trigger-text-weight: 400,
+      placeholder-text-color: #98a2b3,
+    )
+  );
+
+  @include mat.form-field-overrides(
+    (
+      container-vertical-padding: 10px,
+      container-height: 48px,
+      filled-container-color: #f9fafb,
+      outlined-caret-color: #111928,
+      filled-input-text-placeholder-color: #98a2b3,
+    )
+  );
+}
+
+.custom-material-field {
+  .mat-mdc-form-field-icon-prefix > .mat-icon,
+  .mat-mdc-form-field-icon-suffix > .mat-icon {
+    color: #667085;
+  }
+
+  &:focus-within .mdc-notched-outline,
+  &:focus-within .mdc-notched-outline__leading,
+  &:focus-within .mdc-notched-outline__trailing {
+    border-color: #1c5e9b !important;
+    border-width: 1px !important;
+  }
+  .mat-mdc-select-arrow-wrapper {
+    display: none !important;
+  }
+
+  .mdc-notched-outline__leading {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+  }
+
+  .mdc-notched-outline__trailing {
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+  }
+
+  .mdc-text-field--outlined:not(.mat-form-field-invalid) .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mat-form-field-invalid) .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mat-form-field-invalid) .mdc-notched-outline__trailing {
+    border-color: #d0d5dd !important;
+  }
+
+  .mdc-text-field--outlined:not(.mat-form-field-invalid).mdc-text-field--focused
+    .mdc-notched-outline__leading,
+  .mdc-text-field--outlined:not(.mat-form-field-invalid).mdc-text-field--focused
+    .mdc-notched-outline__notch,
+  .mdc-text-field--outlined:not(.mat-form-field-invalid).mdc-text-field--focused
+    .mdc-notched-outline__trailing {
+    border-color: #d0d5dd !important;
+  }
+
+  .mat-form-field-invalid {
+    .mdc-text-field--outlined:not(.mdc-text-field--disabled).mdc-text-field--invalid
+      .mat-mdc-notch-piece {
+      border-color: #f44336 !important;
+    }
+  }
+
+  .mdc-text-field--outlined .mdc-notched-outline {
+    background-color: #fff !important;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    border-radius: 12px;
+    z-index: 0;
+  }
+
+  .mdc-line-ripple {
+    display: none;
+  }
+  .mat-mdc-form-field-subscript-wrapper {
+    display: none !important;
+  }
+  .mdc-text-field--filled {
+    border-radius: 8px;
+  }
+  .mat-mdc-form-field-icon-prefix {
+   padding:  0px 3px 0px 16px
+  }
+
+}
+
+.mat-datepicker-content .mat-calendar {
+  background-color: #f9fafb !important;
+}
