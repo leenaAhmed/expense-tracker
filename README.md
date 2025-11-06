@@ -86,10 +86,10 @@ expense-tracker/
 **Endpoint:** `https://open.er-api.com/v6/latest/USD`
 
 **Implementation Details:**
-- ✅ No API key required
-- ✅ Response caching (1 hour TTL)
-- ✅ Graceful error handling with fallback
-- ✅ Conversion formula: `amountInUSD = amount / exchangeRate`
+-  No API key required
+-  Response caching (1 hour TTL)
+-  Graceful error handling with fallback
+-  Conversion formula: `amountInUSD = amount / exchangeRate`
 
 **Example Response:**
 ```json
@@ -124,33 +124,16 @@ if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
 **Approach:** All filtering and pagination done in-memory
 
 **Rationale:**
-- ✅ No backend required for MVP
-- ✅ Instant filtering with no network delay
-- ✅ Simpler implementation
-- ✅ Works offline
+-  No backend required for MVP
+-  Instant filtering with no network delay
+-  Simpler implementation
+-  Works offline
 
-**Implementation:**
-```typescript
-getFilteredExpenses(filter: DateFilter, page: number, pageSize: number) {
-  const filtered = this.applyDateFilter(allExpenses, filter);
-  const sorted = filtered.sort((a, b) => b.date - a.date);
-  
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
-  
-  return {
-    expenses: sorted.slice(start, end),
-    pagination: {
-      currentPage: page,
-      hasMore: end < sorted.length
-    }
-  };
-}
-```
+ 
 
 **Trade-offs:**
-- ✅ **Pros:** Fast, offline-capable, simple
-- ⚠️ **Cons:** All data loaded upfront (not scalable for 10,000+ expenses)
+-  **Pros:** Fast, offline-capable, simple
+-  **Cons:** All data loaded upfront (not scalable for 10,000+ expenses)
 -  **Future:** Switch to server-side pagination when backend exists
 
 ---
@@ -161,15 +144,7 @@ getFilteredExpenses(filter: DateFilter, page: number, pageSize: number) {
 
 **Source:** [Dribbble - Expense Tracker App](https://dribbble.com/shots/expense-tracker)
 
-**Tailwind Color Palette:**
-```javascript
-colors: {
-  primary: '#6C5DD3',      // Purple buttons/accents
-  success: '#00D9A5',      // Income indicator
-  danger: '#FF6B6B',       // Expense indicator
-  warning: '#FFB800',      // Alerts
-}
-```
+
 
 **Key UI Components:**
 1. **Gradient Header** - Blue rounded card with backdrop blur
@@ -177,37 +152,15 @@ colors: {
 3. **FAB Button** - Floating action button with shadow
 4. **Bottom Navigation** - Fixed navigation bar
 
-### Responsive Breakpoints
 
-```scss
-// Mobile First
-.card { @apply p-4; }
-
-// Tablet (md: 768px)
-@media (min-width: 768px) {
-  .card { @apply p-6; }
-}
-
-// Desktop (lg: 1024px)
-@media (min-width: 1024px) {
-  .container { @apply max-w-4xl; }
-}
-```
-
----
 
 ##  Testing
 
 ### Test Coverage
 
 **Services:**
-- ✅ ExpenseService (10 tests)
-- ✅ CurrencyService (7 tests)
-- ✅ StorageService (5 tests)
+-  ExpenseService (10 tests)
 
-**Components:**
-- ✅ DashboardComponent (6 tests)
-- ✅ LoginComponent (4 tests)
 
 ### Running Tests
 
@@ -218,56 +171,25 @@ ng test
 # Run with coverage
 ng test --code-coverage
 
-# Coverage report location
-open coverage/expense-tracker/index.html
 ```
 
-### Key Test Cases
+ 
 
-**1. Currency Conversion:**
-```typescript
-it('should convert EUR to USD correctly', (done) => {
-  service.convertToUSD(85, 'EUR').subscribe(result => {
-    expect(result).toBe(100); // 85 / 0.85 = 100
-    done();
-  });
-});
-```
-
-**2. Pagination Logic:**
-```typescript
-it('should paginate results correctly', () => {
-  const result = service.getFilteredExpenses(DateFilter.ALL, 1, 10);
-  expect(result.expenses.length).toBe(10);
-  expect(result.pagination.hasMore).toBe(true);
-});
-```
-
-**3. Form Validation:**
-```typescript
-it('should require valid amount', () => {
-  component.expenseForm.patchValue({ amount: -10 });
-  expect(component.expenseForm.invalid).toBe(true);
-});
-```
-
----
-
-## 🚀 Getting Started
+##  Getting Started
 
 ### Prerequisites
 
 ```bash
-Node.js: >= 18.x
-npm: >= 9.x
-Angular CLI: >= 18.x
+Node.js: >= 19.x
+npm: >= .x
+Angular CLI: >= 20.x
 ```
 
 ### Installation
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/expense-tracker.git
+git clone https://github.com/leenaAhmed/expense-tracker.git
 cd expense-tracker
 
 # Install dependencies
@@ -292,7 +214,7 @@ dist/expense-tracker/
 
 ---
 
-## 💾 Data Persistence
+##  Data Persistence
 
 ### LocalStorage Schema
 
@@ -317,18 +239,6 @@ expense_tracker_current_user: User
 }
 ```
 
-### Data Migration (Future)
-
-```typescript
-// If moving to IndexedDB or backend
-async migrateLocalStorage() {
-  const expenses = localStorage.getItem('expense_tracker_expenses');
-  if (expenses) {
-    await this.api.bulkUpload(JSON.parse(expenses));
-    localStorage.removeItem('expense_tracker_expenses');
-  }
-}
-```
 
 ##  Trade-offs & Assumptions
 
@@ -351,11 +261,11 @@ async migrateLocalStorage() {
 
 ### Assumptions
 
-- ✅ Users manage personal expenses (single-user)
-- ✅ Average 100-500 expenses per user
-- ✅ USD as base currency for reporting
-- ✅ Modern browser with ES2020+ support
-- ✅ Decent internet for currency API (optional)
+-  Users manage personal expenses (single-user)
+-  Average 100-500 expenses per user
+-  USD as base currency for reporting
+-  Modern browser with ES2020+ support
+-  Decent internet for currency API (optional)
 
 ---
 
@@ -374,8 +284,7 @@ async migrateLocalStorage() {
 
 3. **No Export Feature**
    - Can't download reports yet
-   - **Solution:** Add CSV/PDF export (bonus feature)
-
+ 
 4. **Limited Category Customization**
    - Fixed 7 categories
    - **Solution:** Add custom category creation
@@ -407,33 +316,6 @@ async migrateLocalStorage() {
 
 ##  Dependencies
 
-### Core
-
-```json
-{
-  "@angular/core": "^18.2.0",
-  "@angular/common": "^18.2.0",
-  "@angular/forms": "^18.2.0",
-  "@angular/router": "^18.2.0",
-  "rxjs": "^7.8.1",
-  "date-fns": "^3.0.0"
-}
-```
-
-### Dev
-
-```json
-{
-  "tailwindcss": "^3.4.0",
-  "typescript": "~5.4.0",
-  "jasmine-core": "~5.1.0",
-  "karma": "~6.4.0"
-}
-```
-
----
-
-
 ##  License
 
 This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
@@ -447,9 +329,3 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 - Icons from [Lucide Icons](https://lucide.dev)
 
 ---
-
-
-
----
-
-**Built with ❤️ using Angular 18 & Tailwind CSS**

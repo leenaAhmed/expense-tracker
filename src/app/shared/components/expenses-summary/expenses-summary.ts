@@ -39,4 +39,16 @@ export class ExpensesSummary {
   formatCurrency(amount: number): string {
     return `$ ${amount.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
   }
+
+  getGreeting(): string {
+    const hour = new Date().getHours();
+    if (hour < 12) {
+      return 'Good Morning';
+    } else if (hour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Evening';
+    }
+  }
+
 }
