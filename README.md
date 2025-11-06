@@ -1,6 +1,6 @@
 #  Expense Tracker Lite
 
-A modern, responsive expense tracking web application built with **Angular 18**, featuring currency conversion, pagination, and offline-first architecture.
+A modern, responsive expense tracking web application built with **Angular 20**, featuring currency conversion, pagination, and offline-first architecture.
 
 ![Angular](https://img.shields.io/badge/Angular-18-red?logo=angular)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.4-blue?logo=typescript)
