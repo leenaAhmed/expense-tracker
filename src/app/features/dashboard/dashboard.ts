@@ -33,7 +33,6 @@ export class Dashboard implements OnInit, OnDestroy {
   error: string | null = null;
 
   private readonly PAGE_SIZE = 10;
-  private currentPage = 1;
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -76,9 +75,6 @@ export class Dashboard implements OnInit, OnDestroy {
 
     try {
       this.allFilteredExpenses = this.expenseService.getFilteredExpenses(this.selectedFilter);
-
-      this.currentPage = 1;
-
       this.loadPage(1);
     } catch (error) {
       this.error = 'Failed to load expenses. Please try again.';
@@ -95,14 +91,8 @@ export class Dashboard implements OnInit, OnDestroy {
 
     const pageExpenses = this.allFilteredExpenses.slice(startIndex, endIndex);
 
-    if (page === 1) {
-      this.paginatedExpenses = pageExpenses;
-    } else {
-      this.paginatedExpenses = [...this.paginatedExpenses, ...pageExpenses];
-    }
-
-    this.currentPage = page;
-    this.hasMore = endIndex < this.allFilteredExpenses.length;
+    this.paginatedExpenses = pageExpenses;
+      
   }
 
   selectFilter(filter: DateFilter): void {
@@ -125,13 +115,4 @@ export class Dashboard implements OnInit, OnDestroy {
     this.router.navigate(['/login']);
   }
 
-  loadMore(): void {
-    if (!this.isLoading && this.hasMore) {
-      this.isLoading = true;
-      setTimeout(() => {
-        this.loadPage(this.currentPage + 1);
-        this.isLoading = false;
-      }, 300);
-    }
-  }
 }
