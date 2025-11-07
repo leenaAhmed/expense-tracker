@@ -11,10 +11,13 @@ import { Navigation } from '../../shared/components/navigation/navigation';
 import { ExpensesSummary } from '../../shared/components/expenses-summary/expenses-summary';
 import { LucideAngularModule } from 'lucide-angular';
 import { Category } from '../../core/services/category/category';
+import { EmptyState } from '../../shared/components/empty-state/empty-state';
+import { ExpenseCard } from '../../shared/components/expense-card/expense-card';
+import { Spinner } from '../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule,ExpensesSummary,LucideAngularModule],
+  imports: [CommonModule, ExpensesSummary, LucideAngularModule, ExpenseCard, EmptyState, Spinner],
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit, OnDestroy {
@@ -22,14 +25,14 @@ export class Dashboard implements OnInit, OnDestroy {
   summary: Summary = { totalBalance: 0, totalIncome: 0, totalExpenses: 0 };
   paginatedExpenses: Expense[] = [];
   allFilteredExpenses: Expense[] = [];
-  hasMore = false;  
+  hasMore = false;
   selectedFilter: DateFilter = DateFilter.THIS_MONTH;
   filters = Object.values(DateFilter);
   showFilterDropdown = false;
-  
+
   isLoading = false;
   error: string | null = null;
-  
+
   private readonly PAGE_SIZE = 10;
   private currentPage = 1;
   private destroy$ = new Subject<void>();
@@ -53,15 +56,16 @@ export class Dashboard implements OnInit, OnDestroy {
   }
 
   loadSummary(): void {
-    this.expenseService.getSummary(this.selectedFilter)
+    this.expenseService
+      .getSummary(this.selectedFilter)
       .pipe(
         takeUntil(this.destroy$),
-        catchError(error => {
+        catchError((error) => {
           this.error = 'Failed to load summary. Please try again.';
           return of({ totalBalance: 0, totalIncome: 0, totalExpenses: 0 });
         })
       )
-      .subscribe(summary => {
+      .subscribe((summary) => {
         this.summary = summary;
         this.error = null;
       });
@@ -70,12 +74,12 @@ export class Dashboard implements OnInit, OnDestroy {
   loadExpenses(): void {
     this.isLoading = true;
     this.error = null;
-    
+
     try {
       this.allFilteredExpenses = this.expenseService.getFilteredExpenses(this.selectedFilter);
-      
+
       this.currentPage = 1;
-      
+
       this.loadPage(1);
     } catch (error) {
       this.error = 'Failed to load expenses. Please try again.';
@@ -89,25 +93,25 @@ export class Dashboard implements OnInit, OnDestroy {
   private loadPage(page: number): void {
     const startIndex = (page - 1) * this.PAGE_SIZE;
     const endIndex = startIndex + this.PAGE_SIZE;
-    
+
     const pageExpenses = this.allFilteredExpenses.slice(startIndex, endIndex);
-    
+
     if (page === 1) {
       this.paginatedExpenses = pageExpenses;
     } else {
       this.paginatedExpenses = [...this.paginatedExpenses, ...pageExpenses];
     }
-    
+
     this.currentPage = page;
     this.hasMore = endIndex < this.allFilteredExpenses.length;
   }
-  
+
   selectFilter(filter: DateFilter): void {
     this.selectedFilter = filter;
     this.showFilterDropdown = false;
     this.loadSummary();
     this.loadExpenses();
-  }   
+  }
 
   toggleFilterDropdown(): void {
     this.showFilterDropdown = !this.showFilterDropdown;

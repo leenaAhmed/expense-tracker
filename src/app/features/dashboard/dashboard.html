@@ -17,20 +17,7 @@
         </div>
 
         @if (isLoading) {
-        <div class="space-y-3">
-          @for (i of [1,2,3]; track i) {
-          <div class="bg-white rounded-xl p-4 animate-pulse">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 bg-gray-200 rounded-xl"></div>
-              <div class="flex-1">
-                <div class="h-4 bg-gray-200 rounded w-24 mb-2"></div>
-                <div class="h-3 bg-gray-200 rounded w-16"></div>
-              </div>
-              <div class="h-5 bg-gray-200 rounded w-16"></div>
-            </div>
-          </div>
-          }
-        </div>
+          <app-spinner></app-spinner>
         }
         @if (error) {
         <div class="bg-red-50 border border-red-200 rounded-xl p-4 mb-4">
@@ -43,40 +30,12 @@
         </div>
         }
         @if (!isLoading && !error && paginatedExpenses.length === 0) {
-        <div  class="text-center py-12">
-          <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
-            </svg>
-          </div>
-          <p class="text-gray-600 font-medium">No expenses yet</p>
-          <p class="text-gray-400 text-sm mt-1">Start tracking by adding your first expense</p>
-        </div>
+           <app-empty-state></app-empty-state>
         }
         @if (!isLoading && paginatedExpenses.length > 0) {
         <div  class="space-y-3">
           @for (expense of paginatedExpenses; track expense) {
-          <div 
-            class="bg-white rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <div class="flex items-center gap-4">
-              <div [style.background-color]="categoryService.getCategoryColor(expense.category) + '20'" 
-                   class="w-12 h-12 rounded-full flex items-center justify-center">
-              <lucide-icon class="text-2xl text-gray-900"
-               [name]="categoryService.getCategoryIcon(expense.category)" [size]="20"></lucide-icon>
-              </div>
-
-              <div class="flex-1">
-                <p class="font-semibold text-gray-900">{{ expense.category }}</p>
-                <p class="text-sm text-gray-500">Manually</p>
-              </div>
-
-              <div class="text-right">
-                <p class="font-bold text-gray-900">-{{ categoryService.formatCurrency(expense.amountInUSD) }}</p>
-                <p class="text-sm text-gray-500">Today {{ categoryService.formatTime(expense.createdAt) }}</p>
-              </div>
-            </div>
-          </div>
+            <app-expense-card [expense]="expense" ></app-expense-card>
           }
         </div>
         }

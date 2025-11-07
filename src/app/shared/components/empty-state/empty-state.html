@@ -1,0 +1,15 @@
+<div class="text-center py-16">
+      <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+          <lucide-icon name="scan-search"></lucide-icon>
+      </div>
+      <h3 class="text-xl font-semibold text-gray-900 mb-2">No expenses found</h3>
+      <p class="text-gray-600 mb-6">
+        {{'Start tracking by adding your first expense'}}
+      </p>
+      <a
+        color="primary"
+        class="text-primary" [routerLink]="'/add-expense'"
+      >
+        Add Expense
+      </a>
+</div>

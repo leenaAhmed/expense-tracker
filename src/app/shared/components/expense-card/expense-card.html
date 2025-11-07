@@ -1,0 +1,32 @@
+<div
+  class="bg-white rounded-xl mb-4 p-4 shadow-sm hover:shadow-md transition-all cursor-pointer group"
+>
+  @if(expense){
+  <div class="flex items-center gap-4">
+    <div
+      [style.background-color]="category.getCategoryColor(expense.category) + '20'"
+      class="w-12 h-12 rounded-full flex items-center justify-center"
+    >
+      <lucide-icon
+        class="text-2xl text-gray-900"
+        [name]="category.getCategoryIcon(expense.category)"
+        [size]="20"
+      ></lucide-icon>
+    </div>
+
+    <div class="flex-1 min-w-0">
+      <p class="font-semibold text-gray-900 truncate">{{ expense.category }}</p>
+      <div class="flex items-center gap-2 text-sm text-gray-500">
+        <span>{{ category.formatTime(expense.createdAt) }}</span>
+      </div>
+    </div>
+
+    <div class="text-right flex-shrink-0">
+      <p class="font-bold text-gray-900">-{{ category.formatCurrency(expense.amountInUSD) }}</p>
+      @if (expense.currency !== 'USD') {
+      <p class="text-xs text-gray-400">{{ expense.amount }} {{ expense.currency }}</p>
+      }
+    </div>
+  </div>
+  }
+</div>

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LucideAngularModule } from 'lucide-angular';
-import { Subject, takeUntil, catchError } from 'rxjs';
-import { of } from 'rxjs';
+import { Subject } from 'rxjs';
 import { Summary, Expense, DateFilter } from '../../../core/models/expense.model';
 import { Category } from '../../../core/services/category/category';
 import { ExpenseService } from '../../../core/services/Expense/expense';
@@ -10,11 +9,21 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
-import { ExpenseLogic } from '../../../core/services/Expense/expens-logic';
-
+import { ExpenseCard } from '../../../shared/components/expense-card/expense-card';
+import { EmptyState } from '../../../shared/components/empty-state/empty-state';
+import { Spinner } from '../../../shared/components/spinner/spinner';
 @Component({
   selector: 'app-expenses-list',
-  imports: [CommonModule, LucideAngularModule, MatIconModule, MatFormFieldModule, MatSelectModule],
+  imports: [
+    CommonModule,
+    LucideAngularModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    ExpenseCard,
+    EmptyState,
+    Spinner
+  ],
   templateUrl: './expenses-list.html',
 })
 export class ExpensesList {
@@ -107,11 +116,10 @@ export class ExpensesList {
     }
   }
 
- 
   onFilterChange(): void {
     this.currentPage = 1;
     this.loadExpenses();
-  }  
+  }
   calculateStats(): void {
     this.totalSpent = this.paginatedExpenses.reduce((sum, e) => sum + e.amountInUSD, 0);
     this.averageSpent = this.filteredCount > 0 ? this.totalSpent / this.filteredCount : 0;
