@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subject, takeUntil, catchError } from 'rxjs';
-import { of } from 'rxjs';
+import { Subject, takeUntil, catchError , of} from 'rxjs';
 import { Summary, Expense, DateFilter } from '../../core/models/expense.model';
 import { User } from '../../core/models/user.model';
 import { AuthService } from '../../core/services/auth/auth';
@@ -92,7 +91,6 @@ export class Dashboard implements OnInit, OnDestroy {
     const pageExpenses = this.allFilteredExpenses.slice(startIndex, endIndex);
 
     this.paginatedExpenses = pageExpenses;
-      
   }
 
   selectFilter(filter: DateFilter): void {
@@ -114,5 +112,4 @@ export class Dashboard implements OnInit, OnDestroy {
     this.authService.logout();
     this.router.navigate(['/login']);
   }
-
 }
