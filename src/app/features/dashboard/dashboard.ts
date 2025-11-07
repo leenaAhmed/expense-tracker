@@ -7,7 +7,6 @@ import { User } from '../../core/models/user.model';
 import { AuthService } from '../../core/services/auth/auth';
 import { ExpenseService } from '../../core/services/Expense/expense';
 import { CommonModule } from '@angular/common';
-import { Navigation } from '../../shared/components/navigation/navigation';
 import { ExpensesSummary } from '../../shared/components/expenses-summary/expenses-summary';
 import { LucideAngularModule } from 'lucide-angular';
 import { Category } from '../../core/services/category/category';

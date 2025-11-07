@@ -17,9 +17,9 @@
         <mat-form-field appearance="fill" class="w-48 custom-material-field">
           <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterChange()">
             @for (filter of filters; track filter) {
-              <mat-option [value]="filter">
-               {{ filter }}
-              </mat-option>
+            <mat-option [value]="filter">
+              {{ filter }}
+            </mat-option>
             }
           </mat-select>
           <mat-icon matSuffix>expand_more</mat-icon>
@@ -44,13 +44,12 @@
     </div>
 
     @if (isLoading) {
-     <app-spinner></app-spinner>
+    <app-spinner></app-spinner>
     } @if (!isLoading && paginatedExpenses.length === 0) {
-     <app-empty-state></app-empty-state>
-    } 
-   @if (!isLoading && paginatedExpenses.length > 0) {
-     @for (expense of paginatedExpenses; track expense.createdAt) {
-      <app-expense-card [expense]="expense" ></app-expense-card>
+    <app-empty-state></app-empty-state>
+    } @if (!isLoading && paginatedExpenses.length > 0) { @for (expense of paginatedExpenses; track
+    expense.createdAt) {
+    <app-expense-card [expense]="expense"></app-expense-card>
     } } @if (hasMore && !isLoading) {
     <button
       (click)="loadMore()"

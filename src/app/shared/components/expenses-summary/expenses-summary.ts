@@ -8,7 +8,6 @@ import { ArrowDown, ArrowUp , LucideAngularModule} from 'lucide-angular';
   selector: 'app-expenses-summary',
   imports: [CommonModule , LucideAngularModule],
   templateUrl: './expenses-summary.html',
-  styleUrl: './expenses-summary.scss',
 })
 export class ExpensesSummary {
   @Input() currentUser: User | null = null;
