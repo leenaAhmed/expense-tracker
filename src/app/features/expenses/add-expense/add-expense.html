@@ -18,7 +18,7 @@
           @for (cat of categoryOptions; track cat) {
           <mat-option [value]="cat.name">
             <span class="flex items-center gap-3">
-              <lucide-icon [name]=" getCategoryIcon(cat.name)" [size]="20" class="text-gray-600"></lucide-icon>
+              <lucide-icon [name]="category.getCategoryIcon(cat.name)" [size]="20" class="text-gray-600"></lucide-icon>
               <span>{{ cat.name }}</span>
             </span>
           </mat-option>
@@ -94,7 +94,7 @@
          >
           <div class="flex-1 p-5 flex items-center rounded-full justify-center"
             [style.background-color]="expenseForm.get('category')?.value === cat.name ? cat.color : '#F3F4F6'">
-            <lucide-icon [name]=" getCategoryIcon(cat.name)" [size]="20"
+            <lucide-icon [name]="category.getCategoryIcon(cat.name)" [size]="20"
              [class.text-white]="expenseForm.get('category')?.value === cat.name"
             [class.text-gray-700]="expenseForm.get('category')?.value !== cat.name"></lucide-icon>
           </div>

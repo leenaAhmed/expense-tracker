@@ -12,7 +12,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { LucideAngularModule, ShoppingCart , IceCreamCone , CarFront , CalendarDays, House, ShoppingBag, Newspaper, Car, Building2, Plus} from 'lucide-angular';
+import { LucideAngularModule, CalendarDays, Plus} from 'lucide-angular';
+import { Category } from '../../../core/services/category/category';
 
 @Component({
   selector: 'app-add-expense',
@@ -28,7 +29,6 @@ import { LucideAngularModule, ShoppingCart , IceCreamCone , CarFront , CalendarD
     LucideAngularModule,
     MatButtonModule],
   templateUrl: './add-expense.html',
-  styleUrl: './add-expense.scss',
 })
 export class AddExpense {
   expenseForm: FormGroup;
@@ -42,7 +42,8 @@ export class AddExpense {
   constructor(
     private fb: FormBuilder,
     private expenseService: ExpenseService,
-    private router: Router
+    private router: Router,
+    public category: Category
   ) {
     this.expenseForm = this.fb.group({
       category: ['Entertainment', Validators.required],
@@ -89,18 +90,7 @@ export class AddExpense {
     return !!(field && field.invalid && (field.dirty || field.touched));
   }
 
-  getCategoryIcon(category: string): string {
-    const icons: { [key: string]: any } = {
-      'Groceries': ShoppingCart,
-      'Entertainment':IceCreamCone ,
-      'Transportation': CarFront,
-      'Rent': House,
-      'News Paper': Newspaper,
-      'Gas': Building2,
-      'Shopping': ShoppingBag
-    };
-    return icons[category] || '';
-  }
+ 
 
   onSubmit(): void {
     if (this.expenseForm.valid) {

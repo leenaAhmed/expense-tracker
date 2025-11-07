@@ -8,6 +8,12 @@ A modern, responsive expense tracking web application built with **Angular 20**,
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 
+## 📸 Screenshots
+
+![Dashboard](./assets/Screenshot1.png)
+![Add Expense](./assets/Screenshot2.png)
+![Login](./assets/Screenshot3.png)
+
 ## Features
 
 ### Core Functionality
@@ -315,10 +321,6 @@ expense_tracker_current_user: User
 ---
 
 ##  Dependencies
-
-##  License
-
-This project is licensed under the MIT License - see [LICENSE](LICENSE) file.
 
 ---
 
