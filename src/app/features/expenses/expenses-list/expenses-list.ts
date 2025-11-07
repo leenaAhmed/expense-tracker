@@ -63,7 +63,7 @@ export class ExpensesList {
 
     try {
       this.allFilteredExpenses = this.expenseService.getFilteredExpenses(this.selectedFilter);
-
+      this.filteredCount = this.allFilteredExpenses.length;
       this.currentPage = 1;
       this.loadPage(1);
     } catch (error) {
