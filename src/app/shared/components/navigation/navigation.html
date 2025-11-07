@@ -1,9 +1,9 @@
+<router-outlet></router-outlet>
 <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-6 py-3 rounded-t-2xl shadow-lg safe-area-bottom">
     <div class="flex items-center justify-between h-16">
-      <button class="text-primary">
-        <lucide-icon [img]="House"></lucide-icon>
-
-      </button>
+      <a class="text-primary" [routerLink]="'/dashboard'" >
+         <lucide-icon [img]="House"></lucide-icon>
+      </a>
 
       <button class="text-gray-400 hover:text-gray-600">
          <lucide-icon [img]="chartColumnBig" ></lucide-icon>
@@ -26,4 +26,4 @@
         <lucide-icon [img]="UserRound" ></lucide-icon>
       </button>
     </div>
-  </div>
+</div>

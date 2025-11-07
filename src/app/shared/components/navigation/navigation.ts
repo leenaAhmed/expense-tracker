@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet, RouterLinkWithHref } from '@angular/router';
 import { LucideAngularModule, House , ChartColumnBig, UserRound , WalletMinimal} from 'lucide-angular';
 import { AuthService } from '../../../core/services/auth/auth';
 
 @Component({
   selector: 'app-navigation',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, RouterOutlet, RouterLinkWithHref],
   templateUrl: './navigation.html',
   styleUrl: './navigation.scss',
 })

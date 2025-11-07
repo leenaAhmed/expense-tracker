@@ -14,7 +14,7 @@ import { Category } from '../../core/services/category/category';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [CommonModule , Navigation ,ExpensesSummary,LucideAngularModule],
+  imports: [CommonModule,ExpensesSummary,LucideAngularModule],
   templateUrl: './dashboard.html',
 })
 export class Dashboard implements OnInit, OnDestroy {
