@@ -12,6 +12,7 @@ A modern, responsive expense tracking web application built with **Angular 20**,
 
 ![Dashboard](src/assets/Screenshot1.png)
 ![Add Expense](src/assets/Screenshot2.png)
+![Expense List](src/assets/Screenshot4.png)
 ![Login](src/assets/Screenshot3.png)
 
 ## Features
