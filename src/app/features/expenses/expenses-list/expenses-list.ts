@@ -56,7 +56,6 @@ export class ExpensesList {
       this.allFilteredExpenses = this.expenseService.getFilteredExpenses(this.selectedFilter);
 
       this.currentPage = 1;
-      this.calculateStats();
       this.loadPage(1);
     } catch (error) {
       this.error = 'Failed to load expenses. Please try again.';
@@ -81,6 +80,7 @@ export class ExpensesList {
 
     this.currentPage = page;
     this.hasMore = endIndex < this.allFilteredExpenses.length;
+    this.calculateStats();
   }
 
   selectFilter(filter: DateFilter): void {
@@ -107,8 +107,11 @@ export class ExpensesList {
     }
   }
 
-  onFilterChange() {}
-
+ 
+  onFilterChange(): void {
+    this.currentPage = 1;
+    this.loadExpenses();
+  }  
   calculateStats(): void {
     this.totalSpent = this.paginatedExpenses.reduce((sum, e) => sum + e.amountInUSD, 0);
     this.averageSpent = this.filteredCount > 0 ? this.totalSpent / this.filteredCount : 0;

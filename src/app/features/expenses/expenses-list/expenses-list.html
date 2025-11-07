@@ -17,9 +17,11 @@
         <h2 class="text-lg font-semibold text-gray-900">Expenses ({{ filteredCount }})</h2>
         <mat-form-field appearance="fill" class="w-48 custom-material-field">
           <mat-select [(value)]="selectedFilter" (selectionChange)="onFilterChange()">
-            <mat-option *ngFor="let filter of filters" [value]="filter">
-              {{ filter }}
-            </mat-option>
+            @for (filter of filters; track filter) {
+              <mat-option [value]="filter">
+               {{ filter }}
+              </mat-option>
+            }
           </mat-select>
           <mat-icon matSuffix>expand_more</mat-icon>
         </mat-form-field>
@@ -42,7 +44,6 @@
       </div>
     </div>
 
-    <!-- Loading State -->
     @if (isLoading) {
     <div class="space-y-3">
       <div *ngFor="let i of [1, 2, 3, 4, 5]" class="bg-white rounded-xl p-4 animate-pulse">
